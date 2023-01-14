@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.lifecycles.step4_solution;
+package com.example.android.codelabs.lifecycle.step4_solution;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.codelabs.lifecycle.R;
+
 
 public class LocationActivity extends AppCompatActivity {
 
@@ -48,7 +49,7 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     private void bindLocationListener() {
-        BoundLocationManager.bindLocationListenerIn(this, mGpsListener, getApplicationContext());
+        com.example.android.codelabs.lifecycle.step4_solution.BoundLocationManager.bindLocationListenerIn(this, mGpsListener, getApplicationContext());
     }
 
     @Override

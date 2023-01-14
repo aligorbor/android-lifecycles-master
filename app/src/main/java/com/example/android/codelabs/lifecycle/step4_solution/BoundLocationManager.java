@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package com.example.android.lifecycles.step4;
+package com.example.android.codelabs.lifecycle.step4_solution;
 
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.util.Log;
-
 
 public class BoundLocationManager {
     public static void bindLocationListenerIn(LifecycleOwner lifecycleOwner,
@@ -41,10 +42,10 @@ public class BoundLocationManager {
                                      LocationListener listener, Context context) {
             mContext = context;
             mListener = listener;
-            //TODO: Add lifecycle observer
+            lifecycleOwner.getLifecycle().addObserver(this);
         }
 
-        //TODO: Call this on resume
+        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
         void addLocationListener() {
             // Note: Use the Fused Location Provider from Google Play Services instead.
             // https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi
@@ -62,7 +63,8 @@ public class BoundLocationManager {
             }
         }
 
-        //TODO: Call this on pause
+
+        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
         void removeLocationListener() {
             if (mLocationManager == null) {
                 return;

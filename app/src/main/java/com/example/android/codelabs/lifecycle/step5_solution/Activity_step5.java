@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.example.android.lifecycles.step5;
+package com.example.android.codelabs.lifecycle.step5_solution;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android.codelabs.lifecycle.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Shows two {@link Fragment_step5} fragments.
@@ -30,6 +31,6 @@ public class Activity_step5 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_step5);
+        setContentView(R.layout.activity_step5_solution);
     }
 }

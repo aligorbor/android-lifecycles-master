@@ -42,7 +42,7 @@
       <option name="ADVANCED_PROFILING_ENABLED" value="false" />
     </Profilers>
     <option name="DEEP_LINK" value="" />
-    <option name="ACTIVITY_CLASS" value="com.example.android.lifecycles.step2.ChronoActivity2" />
+    <option name="ACTIVITY_CLASS" value="com.example.codelabs.lifecycle.step2.ChronoActivity2" />
     <method>
       <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1510587765144" />

@@ -1,4 +1,4 @@
-package com.example.android.lifecycles.step1
+package com.example.android.codelabs.lifecycle.step1
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.lifecycles.step3_solution;
+package com.example.android.codelabs.lifecycle.step3_solution;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
