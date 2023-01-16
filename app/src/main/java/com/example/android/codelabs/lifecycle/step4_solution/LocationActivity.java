@@ -49,7 +49,7 @@ public class LocationActivity extends AppCompatActivity {
     }
 
     private void bindLocationListener() {
-        com.example.android.codelabs.lifecycle.step4_solution.BoundLocationManager.bindLocationListenerIn(this, mGpsListener, getApplicationContext());
+        BoundLocationManager.bindLocationListenerIn(this, mGpsListener, getApplicationContext());
     }
 
     @Override
