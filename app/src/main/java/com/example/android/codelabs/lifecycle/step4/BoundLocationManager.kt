@@ -33,12 +33,11 @@ object BoundLocationManager {
 
         override fun onResume(owner: LifecycleOwner) {
             super.onResume(owner)
-            super.onStart(owner)
             addLocationListener()
         }
 
         override fun onPause(owner: LifecycleOwner) {
-            super.onStop(owner)
+            super.onPause(owner)
             removeLocationListener()
         }
 
