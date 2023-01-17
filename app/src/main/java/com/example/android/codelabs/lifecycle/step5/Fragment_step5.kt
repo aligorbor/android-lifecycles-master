@@ -13,59 +13,52 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.example.android.codelabs.lifecycle.step5
 
-package com.example.android.codelabs.lifecycle.step5;
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import com.example.android.codelabs.lifecycle.R
 
-
-import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.SeekBar;
-
-import com.example.android.codelabs.lifecycle.R;
-
-/**
- * Shows a SeekBar that should be synced with a value in a ViewModel.
- */
-public class Fragment_step5 extends Fragment {
-
-    private SeekBar mSeekBar;
-
-    private com.example.android.codelabs.lifecycle.step5.SeekBarViewModel mSeekBarViewModel;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+class Fragment_step5 : Fragment() {
+    private lateinit var mSeekBar: SeekBar
+    private val mSeekBarViewModel: SeekBarViewModel by activityViewModels()
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_step5, container, false);
-        mSeekBar = root.findViewById(R.id.seekBar);
+        val root = inflater.inflate(R.layout.fragment_step5, container, false)
+        mSeekBar = root.findViewById(R.id.seekBar)
 
-        // TODO: get ViewModel
-        subscribeSeekBar();
-
-        return root;
+        subscribeSeekBar()
+        return root
     }
 
-    private void subscribeSeekBar() {
+    private fun subscribeSeekBar() {
 
         // Update the ViewModel when the SeekBar is changed.
-
-        mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // TODO: Set the ViewModel's value when the change comes from the user.
+        mSeekBar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    Log.d("Step5", "Progress changed!")
+                    mSeekBarViewModel.setSeekbarValue(progress)
+                }
             }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) { }
-        });
-
-        // TODO: Update the SeekBar when the ViewModel is changed.
-        // mSeekBarViewModel.seekbarValue.observe(...
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
+        //  Update the SeekBar when the ViewModel is changed.
+       mSeekBarViewModel.seekbarValue.observe(viewLifecycleOwner, Observer {
+           mSeekBar.progress = it
+       })
     }
 }

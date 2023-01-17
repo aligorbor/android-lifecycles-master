@@ -13,52 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.example.android.codelabs.lifecycle.step6
 
-package com.example.android.codelabs.lifecycle.step6;
-
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.android.codelabs.lifecycle.R;
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import com.example.android.codelabs.lifecycle.R
+import android.widget.TextView
+import android.widget.EditText
+import androidx.activity.viewModels
 
 /**
  * Shows a simple form with a button and displays the value of a property in a ViewModel.
  */
-public class SavedStateActivity extends AppCompatActivity {
-
-    private com.example.android.codelabs.lifecycle.step6.SavedStateViewModel mSavedStateViewModel;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.saved_state_activity);
-
-        // Obtain the ViewModel
-        mSavedStateViewModel = new ViewModelProvider(this).get(com.example.android.codelabs.lifecycle.step6.SavedStateViewModel.class);
+class SavedStateActivity : AppCompatActivity() {
+    private val mSavedStateViewModel: SavedStateViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.saved_state_activity)
 
         // Show the ViewModel property's value in a TextView
-        mSavedStateViewModel.getName().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String savedString) {
-                ((TextView)findViewById(R.id.saved_vm_tv))
-                        .setText(getString(R.string.saved_in_vm, savedString));
-            }
-        });
+        mSavedStateViewModel.name.observe(this) { savedString ->
+            (findViewById<View>(R.id.saved_vm_tv) as TextView).text =
+                getString(R.string.saved_in_vm, savedString)
+        }
 
         // Save button
-        findViewById(R.id.save_bt).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String newName = ((EditText)findViewById(R.id.name_et)).getText().toString();
-                mSavedStateViewModel.saveNewName(newName);
-            }
-        });
+        findViewById<View>(R.id.save_bt).setOnClickListener {
+            val newName = (findViewById<View>(R.id.name_et) as EditText).text.toString()
+            mSavedStateViewModel.saveNewName(newName)
+        }
     }
 }

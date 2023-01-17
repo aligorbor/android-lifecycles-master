@@ -13,25 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.example.android.codelabs.lifecycle.step6
 
-package com.example.android.codelabs.lifecycle.step6;
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-public class SavedStateViewModel extends ViewModel {
-
-    // TODO: Create constructor and use the LiveData from SavedStateHandle.
-
-    private MutableLiveData<String> name = new MutableLiveData<>();
-
+class SavedStateViewModel(private val mState: SavedStateHandle) : ViewModel() {
     // Expose an immutable LiveData
-    public LiveData<String> getName() {
-        return name;
+    val name: LiveData<String>
+        get() = mState.getLiveData(NAME_KEY)
+
+    fun saveNewName(newName: String?) {
+        mState[NAME_KEY] = newName
     }
 
-    public void saveNewName(String newName) {
-        name.setValue(newName);
+    companion object {
+        private const val NAME_KEY = "name"
     }
 }
